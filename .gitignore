@@ -1,3 +1,7 @@
 __pycache__
 .env
 .learn
+venv/
+data/data_EDA.csv
+myenv/
+src/globalterrorismdb.csv
