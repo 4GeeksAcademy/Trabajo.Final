@@ -297,11 +297,11 @@ elif options == 'Modelo de predicción':
     st.markdown("<h1 style='text-align: center;'>Modelo de predicción</h1>", unsafe_allow_html=True)
 
 #cargmaos el modelo
-    model_path = "models/bestxgb2.pkl"
+    model_path = "bestxgb2.pkl"
     xgb_model = load(open(model_path, "rb"))
     
 #cargmaos el mapeo de variables es lenguaje humano
-    mappings_path = "models/mappings2.pkl"
+    mappings_path = "mappings2.pkl"
     country_map, attacktype_map, targtype_map, gname_map, ideology_map = load(open(mappings_path, "rb"))
 
 #se hace la inversion de los mapeos para get los valores # a partir de las selecciones
