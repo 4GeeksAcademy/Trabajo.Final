@@ -1,6 +1,5 @@
 import streamlit as st
 import numpy as np
-import joblib
 from xgboost import XGBClassifier
 import os
 import pandas as pd
@@ -8,8 +7,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import folium
 from streamlit_folium import folium_static
-import plotly.express as px
-import plotly.graph_objects as go
 from pickle import dump, load
 
 
