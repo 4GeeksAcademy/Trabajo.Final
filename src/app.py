@@ -13,14 +13,14 @@ from pickle import dump, load
 
 data_dir = 'src'
 try:
-    data_path = 'src/suicide_attacks_filtered.csv'  # el archivo esta en la carpeta src
+    data_path = 'suicide_attacks_filtered.csv'  # el archivo esta en la carpeta src
     data = pd.read_csv(data_path, parse_dates=['date'])
 except FileNotFoundError:
     st.error(f"El archivo {data_path} no se encuentra. Asegúrate de que el archivo está en la misma carpeta que este script.")
     st.stop()
 
 # Configuramos la barra side
-st.sidebar.image('src/logo2.png', width=50, use_column_width=True)
+st.sidebar.image('logo2.png', width=50, use_column_width=True)
 st.sidebar.title('Navegación')
 options = st.sidebar.radio('Selecciona una página:', 
                           ['Inicio', 'Ataques suicidas en el tiempo', 'Impacto de ataques suicidas', 'Mapa de ataques suicidas', 'Modelo de predicción'])
@@ -117,7 +117,7 @@ if options == 'Inicio':
 # Página 1: Ataques suicidas en el tiempo
 elif options == 'Ataques suicidas en el tiempo':
     st.markdown("<h1 style='text-align: center;'>Ataques Suicidas a lo Largo del Tiempo</h1>", unsafe_allow_html=True)
-    imagen_ataquespy = st.image('src/Suicide attacks per year.png') 
+    imagen_ataquespy = st.image('Suicide attacks per year.png') 
 
     st.markdown("""
     ### Ataques suicidas por año:
@@ -132,7 +132,7 @@ elif options == 'Ataques suicidas en el tiempo':
 
     #Agregamos aqui el grafico con la prediccion hecha con modelo Prophet
     st.markdown("<h1 style='text-align: center;'>Predicción de Ataques Suicidas</h1>", unsafe_allow_html=True)
-    imagen = st.image('src/PREDICCION.png')   
+    imagen = st.image('PREDICCION.png')   
     
     st.markdown("""
     ### Predicción de ataques suicidas:
@@ -145,7 +145,7 @@ elif options == 'Ataques suicidas en el tiempo':
     """)
 
 #cargo el csv de forecast pra la tabla
-    forecast_path = 'src/forecast_prophet.csv'
+    forecast_path = 'forecast_prophet.csv'
     forecast_df = pd.read_csv(forecast_path)
 
 #mostramos solo el ano
@@ -209,7 +209,7 @@ elif options == 'Impacto de ataques suicidas':
     st.subheader("Top 5 Ataques más mortíferos por grupo terrorista")
     
     # Cargar los datos desde el archivo CSV
-    deadly_attacks_path = os.path.join(data_dir, 'top_5_deadly_attacks.csv')
+    deadly_attacks_path = 'top_5_deadly_attacks.csv'
     top_5_deadly_attacks = pd.read_csv(deadly_attacks_path)
 
     # Graficar los datos
