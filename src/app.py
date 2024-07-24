@@ -22,8 +22,9 @@ except FileNotFoundError:
 # Configuramos la barra side
 st.sidebar.image('logo2.png', width=50, use_column_width=True)
 st.sidebar.title('Navegación')
-options = st.sidebar.radio('Selecciona una página:', 
-                          ['Inicio', 'Ataques suicidas en el tiempo', 'Impacto de ataques suicidas', 'Mapa de ataques suicidas', 'Modelo de predicción'])
+st.sidebar.header('Selecciona una página:')
+options = st.sidebar.radio('', 
+                          ['Inicio', 'Ataques suicidas en el tiempo', 'Análisis gráfico de ataques suicidas', 'Mapa de ataques suicidas', 'Modelo de predicción'])
 
 # Página de Inicio
 if options == 'Inicio':
@@ -175,10 +176,27 @@ elif options == 'Ataques suicidas en el tiempo':
     - **Límite Superior**: El límite superior del intervalo de confianza para la predicción.
     """)
 
-# Página 2: Impacto de ataques y ataques más mortíferos por grupo
-elif options == 'Impacto de ataques suicidas':
-    st.markdown("<h1 style='text-align: center;'>Impacto de los Ataques Suicidas</h1>", unsafe_allow_html=True)
+# Página 2: analisis grafico
+elif options == 'Análisis gráfico de ataques suicidas':
+    st.markdown("<h1 style='text-align: center;'>Análisis gráfico de ataques suicidas</h1>", unsafe_allow_html=True)
 
+   # Top 10 Países donde ocurrieron los ataques suicidas
+    st.subheader("Top 10 Países donde ocurrieron los ataques suicidas")
+    st.image('paises adonde ocurrieron.png')
+    
+    # Tipos de objetivos
+    st.subheader("Tipos de objetivos en los ataques suicidas")
+    st.image('tipo de target.png')
+    
+    # Top 10 Grupos Terroristas
+    st.subheader("Top 10 Grupos Terroristas responsables de ataques suicidas")
+    st.image('top 10 grupos.png')
+    
+    # Top 5 Grupos más Letales
+    st.subheader("Top 5 Grupos Terroristas más Letales")
+    st.image('grupos mas letales.png')
+    
+    
     # Impacto 
     st.subheader("Impacto total por grupo terrorista")
 
@@ -197,9 +215,9 @@ elif options == 'Impacto de ataques suicidas':
         ax=ax, 
         color=['lightblue', 'grey']
     )
-    plt.xlabel('Grupo Terrorista')
-    plt.ylabel('Número de Personas')
-    plt.title('Muertes y Heridos por los 5 Grupos más Letales')
+    plt.xlabel('Grupo terrorista')
+    plt.ylabel('Número de personas')
+    plt.title('Muertes y heridos por los 5 Grupos más letales')
     plt.grid(True)
     st.pyplot(fig_impact)
     
@@ -296,6 +314,44 @@ elif options == 'Mapa de ataques suicidas':
 elif options == 'Modelo de predicción':
     st.markdown("<h1 style='text-align: center;'>Modelo de predicción</h1>", unsafe_allow_html=True)
 
+    st.markdown("""
+        ## Reducción de datos analizando los últimos 3 años
+    
+        **Justificación:** Los datos más recientes reflejan las tendencias y patrones actuales del terrorismo, lo cual es crucial para la toma de decisiones y políticas actuales. Las tácticas, objetivos y métodos de los grupos terroristas pueden cambiar con el tiempo, y usar datos recientes ayuda a capturar estas evoluciones. Además, la calidad de los datos y las metodologías de recolección pueden haber mejorado con el tiempo, haciendo que los datos recientes sean más precisos y completos. Nuestro dataset abarca desde 1970 hasta 2017.
+    
+        **Posibles desventajas:** Se podrían perder patrones históricos importantes que podrían ser relevantes.
+    
+        ## Ingeniería de características con tratamiento de datos atípicos y perdidos
+    
+        La ingeniería de características es esencial para mejorar el rendimiento de los modelos. Tratar los datos atípicos y perdidos de manera adecuada es crucial para evitar que estos afecten negativamente el modelo, violando supuestos básicos como la homocedasticidad.
+    
+        **Datos atípicos (outliers):** El tratamiento se ha llevado a cabo con la mediana, una técnica robusta que no se ve afectada por valores extremos.
+    
+        **Datos perdidos:** Imputar los valores perdidos con la mediana es una buena técnica cuando los datos no siguen una distribución normal, que es nuestro caso.
+    
+        ## Eliminación de variables correlacionadas
+
+        Las variables altamente correlacionadas pueden introducir multicolinealidad en los modelos, lo que puede llevar a interpretaciones erróneas y afectar la estabilidad del modelo.
+    
+        **Técnica:** Se calcula la matriz de correlación y se elimina una de cada par de variables con alta correlación.
+    
+        **Justificación:** Esto simplifica el modelo y puede mejorar su rendimiento y generalización.
+    
+        ## Clasificación completa con árboles de decisión, bosques aleatorios y boosting
+    
+        Hemos probado diferentes modelos de clasificación:
+    
+        - **Árboles de decisión:** Son fáciles de interpretar, pero pueden ser propensos al sobreajuste.
+        - **Bosques aleatorios (random forests):** Combina múltiples árboles de decisión para mejorar la precisión y reducir el sobreajuste.
+        - **Boosting (como gradient boosting):** Construye modelos de manera secuencial, corrigiendo errores de modelos anteriores y tiende a proporcionar una alta precisión.
+    
+        ## Elección de boosting
+    
+        Boosting ha sido elegido por su capacidad para trabajar con conjuntos de datos complejos y con ruido. Su habilidad para corregir errores y mejorar el rendimiento iterativamente es especialmente útil en nuestro caso.
+        """, unsafe_allow_html=True)
+
+
+
 #cargmaos el modelo
     model_path = "bestxgb2.pkl"
     xgb_model = load(open(model_path, "rb"))
@@ -342,7 +398,7 @@ elif options == 'Modelo de predicción':
 
     # mostramos lo predecido 
     st.markdown(
-        f"<h2 style='text-align: center; font-size: 48px; color: #ff4b4b;'>¿Predecimos un ataque suicida? {prediction_text}</h2>",
+        f"<h2 style='text-align: center; font-size: 36px; color: #333333;'>¿Predecimos un ataque suicida? {prediction_text}</h2>",
         unsafe_allow_html=True
     )
 #agregamos algo asi como un exto de warning por el resultado    

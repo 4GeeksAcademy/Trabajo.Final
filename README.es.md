@@ -11,8 +11,7 @@ El proyecto está organizado de la siguiente manera:
 - `app.py` - El script principal de la app de streamlit.
 - `EDA.ipynb` - El notebook con el EDA completo y modelos implementados.
 - `requirements.txt` - Este archivo contiene la lista de paquetes de Python necesarios.
-- `models/` - Este directorio contiene el modelo seleccionado y el mapping creado de las variables factorizadas
-- `src/` - Este directorio contiene los el dataset original, los csv creados para correr en streamlit, imagenes usadas en el streamlit
+- `src/` - Este directorio contiene los el dataset original, los csv creados para correr en streamlit, imagenes usadas en el streamlit, el modelo seleccionado y el mapping creado de las variables factorizadas
 
 
 ## Configuración
@@ -35,7 +34,10 @@ pip install -r requirements.txt
 
 Este proyecto fue creado por:
 •	Angel Herrero
-• Melina Iocco
+•   Melina Iocco
 •	Begoña Lorite
 
 
+## URL
+
+https://trabajo-final-8piz.onrender.com/
