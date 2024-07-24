@@ -133,7 +133,7 @@ elif options == 'Ataques suicidas en el tiempo':
 
     #Agregamos aqui el grafico con la prediccion hecha con modelo Prophet
     st.markdown("<h1 style='text-align: center;'>Predicción de Ataques Suicidas</h1>", unsafe_allow_html=True)
-    imagen = st.image('PREDICCION.png')   
+    imagen = st.image('Prediction.png')   
     
     st.markdown("""
     ### Predicción de ataques suicidas:
@@ -188,72 +188,17 @@ elif options == 'Análisis gráfico de ataques suicidas':
     st.subheader("Tipos de objetivos en los ataques suicidas")
     st.image('tipo de target.png')
     
-    # Top 10 Grupos Terroristas
+    # Top 10 Grupos terroristas
     st.subheader("Top 10 Grupos Terroristas responsables de ataques suicidas")
     st.image('top 10 grupos.png')
     
-    # Top 5 Grupos más Letales
-    st.subheader("Top 5 Grupos Terroristas más Letales")
-    st.image('grupos mas letales.png')
+    # Top 5 Grupos más letales
+    st.subheader("Top 5 Grupos Terroristas más letales")
+    st.image('top5mascasual.png')
     
-    
-    # Impacto 
-    st.subheader("Impacto total por grupo terrorista")
-
-    # Calcular impacto total (muertes + heridos) por grupo terrorista
-    impact_df = data.groupby('gname')[['nkill', 'nwound']].sum()
-    impact_df['total_impact'] = impact_df['nkill'] + impact_df['nwound']
-
-    # Obtener los 5 grupos terroristas más letales
-    top_5_groups = impact_df.sort_values(by='total_impact', ascending=False).head(5)
-
-    # Graficar el impacto de los 5 grupos más letales
-    fig_impact, ax = plt.subplots(figsize=(10, 6))
-    top_5_groups[['nkill', 'nwound']].rename(columns={'nkill': 'Número de Muertos', 'nwound': 'Número de Heridos'}).plot(
-        kind='bar', 
-        stacked=True, 
-        ax=ax, 
-        color=['lightblue', 'grey']
-    )
-    plt.xlabel('Grupo terrorista')
-    plt.ylabel('Número de personas')
-    plt.title('Muertes y heridos por los 5 Grupos más letales')
-    plt.grid(True)
-    st.pyplot(fig_impact)
-    
-    st.markdown("<br><br>", unsafe_allow_html=True)
-
-    # Ataques Más Mortíferos por Grupo Terrorista
-    st.subheader("Top 5 Ataques más mortíferos por grupo terrorista")
-    
-    # Cargar los datos desde el archivo CSV
-    deadly_attacks_path = 'top_5_deadly_attacks.csv'
-    top_5_deadly_attacks = pd.read_csv(deadly_attacks_path)
-
-    # Graficar los datos
-    fig_deadly_attacks, ax = plt.subplots(figsize=(12, 10))
-    bar_width = 0.4
-
-    # Posiciones para las barras
-    r1 = range(len(top_5_deadly_attacks))
-    r2 = [x + bar_width for x in r1]
-
-    # Crear las barras
-    ax.bar(r1, top_5_deadly_attacks['nkill'], color='lightblue', width=bar_width, edgecolor='grey', label='Número de Muertos')
-    ax.bar(r2, top_5_deadly_attacks['nwound'], color='grey', width=bar_width, edgecolor='grey', label='Número de Heridos')
-
-    # Añadir etiquetas
-    ax.set_xlabel('Grupo Terrorista', fontweight='bold')
-    ax.set_xticks([r + bar_width / 2 for r in range(len(top_5_deadly_attacks))])
-    ax.set_xticklabels(top_5_deadly_attacks['gname'], rotation=45, ha='right')
-    ax.set_ylabel('Número de Personas', fontweight='bold')
-    ax.set_title('Top 5 Ataques Más Mortíferos por Grupo Terrorista', fontweight='bold')
-
-    # Añadir leyenda
-    ax.legend()
-
-    plt.tight_layout()
-    st.pyplot(fig_deadly_attacks)
+    # Ataques más Letales
+    st.subheader("Ataques suicidas mas mortíferos de la historia")
+    st.image('masmorthist.png')
 
 
 
