@@ -46,6 +46,8 @@ if options == 'Inicio':
     3. **Actores subnacionales**: Los perpetradores deben ser actores no estatales; el GTD no incluye actos de terrorismo estatal.
     """)
     
+    st.image("ataques_total_global.png", caption="Top 10 Ataques terroristas más mortíferos", use_column_width=True)
+    
     st.markdown("""
     ### Planteamiento del problema y objetivo de la investigación
 
@@ -196,9 +198,6 @@ elif options == 'Análisis gráfico de ataques suicidas':
     st.subheader("Top 5 Grupos Terroristas más letales")
     st.image('top5mascasual.png')
     
-    # Ataques más Letales
-    st.subheader("Ataques suicidas mas mortíferos de la historia")
-    st.image('masmorthist.png')
 
 
 
@@ -281,7 +280,12 @@ elif options == 'Modelo de predicción':
         **Técnica:** Se calcula la matriz de correlación y se elimina una de cada par de variables con alta correlación.
     
         **Justificación:** Esto simplifica el modelo y puede mejorar su rendimiento y generalización.
-    
+    """, unsafe_allow_html=True)
+
+    # gráfico heatmap.png
+    st.image("heatmap.png", caption="Matriz de correlación", use_column_width=True)
+
+    st.markdown("""
         ## Clasificación completa con árboles de decisión, bosques aleatorios y boosting
     
         Hemos probado diferentes modelos de clasificación:
@@ -293,7 +297,7 @@ elif options == 'Modelo de predicción':
         ## Elección de boosting
     
         Boosting ha sido elegido por su capacidad para trabajar con conjuntos de datos complejos y con ruido. Su habilidad para corregir errores y mejorar el rendimiento iterativamente es especialmente útil en nuestro caso.
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 
 
